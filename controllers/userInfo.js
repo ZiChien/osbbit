@@ -9,22 +9,24 @@ const db = mysql.createConnection({
 });
 
 exports.getuserpost = (req ,res)=>{
+    console.log(req.params.username);
     db.query(`SELECT * FROM users WHERE name = ?`,[req.params.username],(err, results)=>{
         if(err) throw err
         if(results.length==0){
-            return;
+            console.log('user not found')
+            return res.status(404).send('user not found')
         }
+        console.log(req.params.username);
         let id = results[0].id;
         db.query(`SELECT image_name FROM users_image WHERE user_id = ?`,[id],(err, results)=>{
-        if(err) throw err;
-        
-        res.json({
-            userid : id,
-            imagePath : results
+            if(err) throw err;
+            
+            res.json({
+                userid : id,
+                imagePath : results
+            })
         })
     })
-    })
-    
 }
 exports.authpassword = (req, res)=>{
     if(!req.session.user){

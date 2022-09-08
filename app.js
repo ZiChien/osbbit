@@ -32,18 +32,18 @@ dotenv.config({
     path: './config.env'
 });
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.host,
     user: process.env.user,
     password: process.env.password,
     database: process.env.database
 });
 
-db.connect((err)=>{
-    if(err)
-        console.log(err);
-    console.log("My sql connected!");
-})
+// db.connect((err)=>{
+//     if(err)
+//         console.log(err);
+//     console.log("My sql connected!");
+// })
 
 app.use(session({
     secret: 'mySecret',
