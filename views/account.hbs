@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    {{!-- ------------------------------------------------ --}}
+
+    <link rel="stylesheet" href="\croppie.css">
+    {{!-- croppie- --}}
+    <script src="https://kit.fontawesome.com/358b6c58bb.js" crossorigin="anonymous"></script>
+
+    {{!-- Jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{!-- axios --}}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script src="home.js"></script>
+    <script src="account-avater.js"></script>
+    <title>Osbbit(@{{username}})</title>
+</head>
+
+<body>
+    <header>
+        <div class="osnav">
+            <nav>
+                <div class="oslogo"><a href="./"><img src="/img/static/logo.png" alt=""></a></div>
+                <div class="toollist">
+                    <div class="tool">
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal"><span><i
+                                    class="fa-solid fa-plus"></i></span></button>
+                    </div>
+                    <div class="tool tool_search">
+						<button onclick="location.href='/explore'"><i class="fa-solid fa-magnifying-glass"></i></button>
+					</div>
+                    <div class="tool avater">
+                        <button><a href="/account"><img src={{avater}} alt=""></a></button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="os-container">
+            <div class="os-login">
+                <div class="container">
+                    <div class="row">
+                        <div id="first">
+                            <div class="myform form form-account">
+                                <div class="avater-container">
+                                    <div class="avater-img">
+                                        <img src={{avater}} alt="">
+                                    </div>
+                                    <div class="avater-change">
+                                        <h2>{{username}}</h2>
+                                        <div class="upload-labal-avater">
+                                            <label class="btn-file">
+                                                <input type="file" id="upload_image-avater"
+                                                    name="upload_image-avater" style="display:none ;">
+                                                <p>變更大頭貼照</p>
+                                            </label>
+                                        </div>
+                                        <button data-bs-toggle="modal" style="display: none;" data-bs-target="#exampleModal2"
+                                            id="avaterChange-btn">變更大頭貼照</button>
+                                    </div>
+                                </div>
+                                <form action="/auth/rename" method="post" name="login" id="signup-form">
+                                    <div class="form-group account-label">
+                                        <label for="email" id="email-label">電子郵件</label>
+                                        <label class="changedpw-btn" for=""><a href="/account/changpassword">變更密碼</a></label>
+                                        <input type="email" name="email" {{#if email}} value={{email}} {{/if}}class="form-control"
+                                            id="email" aria-describedby="emailHelp" placeholder="email" readonly>
+                                    </div>
+                                    <div class="form-group account-label">
+                                        <label for="newname">姓名</label>
+                                        <label for="newname" id="namelabel"></label>
+                                        <input type="text" name="newname" value={{username}} id="newname"
+                                            class="form-control" aria-describedby="emailHelp"
+                                            placeholder="Username">
+                                    </div>
+                                    <div class="form-group account-label">
+                                        <label for="intro">個人簡介</label>
+                                        <textarea class="form-control" name="intro" id="intro" cols="30" rows="3" placeholder="個人簡介" >{{#if intro}}{{{intro}}}{{/if}}</textarea>
+                                        {{!-- <input type="text" name="intro" {{#if intro}} value={{intro}} {{/if}} id="intro" class="form-control"
+                                            aria-describedby="emailHelp" placeholder="個人簡介"> --}}
+                                    </div>
+                                    
+                                    <div class="form-group account-label">
+                                        <label for="web">網址</label>
+                                        <input type="text" name="web" {{#if web}} value={{web}} {{/if}} id="web" class="form-control"
+                                            aria-describedby="emailHelp" placeholder="網址">
+                                    </div>
+
+
+                                    <div class="col-md-12 text-center ">
+                                        <button type="button" id="btn_info" class=" btn btn-block btn-primary tx-tfm btn-252f">提交</button>
+                                        <button onclick="location.href='/auth/logout'" type="button" class=" btn btn-block btn-primary tx-tfm btn-252f btn-logout">登出</button>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <div class="login-or">
+                                            <hr class="hr-or">
+                                            <span class="span-or"></span>
+                                        </div>
+                                    </div>
+                                    {{!-- <div class="col-md-12 mb-3">
+                                        <p class="text-center">
+                                            <a href="javascript:void();" class="google btn mybtn"><i
+                                                    class="fa fa-google-plus">
+                                                </i> Signup using Google
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="text-center">Already have a account ?<a href="/login"
+                                                id="signup">Login</a></p>
+                                    </div> --}}
+                                </form>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered os-modal">
+            <div class="os-close-btn">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+                    <form action="/auth/uploadpost" id="uploadform" method="post">
+
+                        <button type="submit" id="uploadimage" class="btn btn-primary" disabled>Next</button>
+                        <input type="hidden" id="imagebase64" name="imagebase64">
+                        <input type="hidden" id="imagename" name="imagename">
+                    </form>
+                </div>
+                <div class="modal-body" style="display: none">
+                    <div class="inputfile">
+
+                    </div>
+                    <div id="page">
+                        <div id="demo-basic">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="photo-icon">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <div class="upload-labal">
+                        <label class="btn-file">
+                            <input type="file" id="upload_image" name="upload_image" style="display:none ;">
+                            <p>upload</p>
+                        </label>
+                    </div>
+
+
+                    {{!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered os-modal" id="modal-avater">
+            <div class="os-close-btn">
+                <button type="button" class="btn-close" id="avater-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+            </div>
+
+            <div class="modal-content">
+                
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">avater</h5>
+                    <form action="/auth/upload_avater" id="uploadform" method="post">
+
+                        <button type="submit" id="uploadimage-avater" class="btn btn-primary" disabled>Next</button>
+                        <input type="hidden" id="imagebase64-avater" name="imagebase64_avater">
+                        <input type="hidden" id="imagename-avater" name="imagename_avater">
+                    </form>
+                </div>
+                <div class="modal-body-avater">
+                    <div class="inputfile">
+
+                    </div>
+                    <div id="page">
+                        <div id="demo-basic-avater">
+                        </div>
+                    </div>
+
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="\croppie.min.js"></script>
+</body>
+
+</html>
