@@ -60,6 +60,7 @@ const auth = require('./routes/auth');
 app.use('/',router);
 app.use('/auth',auth);
 
-app.listen(5000,()=>{
+const PORT = process.env.PORT || 5000
+app.listen(PORT,()=>{
     console.log('Your server is runnig on Port 5000!');
 })
