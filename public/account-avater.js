@@ -22,7 +22,7 @@ $(function () {
     //     $('.modal-footer-avater').hide()
     // })
 
-    
+
     let modal = document.getElementById('exampleModal2')
     let ismodalopen = false;
     let basic_avater;
@@ -31,9 +31,9 @@ $(function () {
         $('#avaterChange-btn').trigger('click');
 
         modal.ontransitionend = function (event) {
-            
+
             if (event.propertyName == 'opacity') {
-                if(ismodalopen){
+                if (ismodalopen) {
                     ismodalopen = false;
                     return;
                 }
@@ -43,11 +43,13 @@ $(function () {
                         height: 300,
                         type: 'circle'
                     },
-                    
+
                 });
                 var reader_avater = new FileReader();
                 var file_avater = $('input[name="upload_image-avater"]').prop('files');
                 avatername = file_avater[0].name
+
+                let filename = file_avater[0].name.split('.')
                 reader_avater.onload = function (event) {
                     basic_avater.croppie('bind', {
                         url: event.target.result
@@ -63,7 +65,7 @@ $(function () {
             }
         }
     })
-    $('#exampleModal2').on('hidden.bs.modal',function(){
+    $('#exampleModal2').on('hidden.bs.modal', function () {
         $('#upload_image-avater').val('')
         $('#demo-basic-avater').croppie('destroy')
         console.log("modal close!")
@@ -78,49 +80,50 @@ $(function () {
         })
             .then(function (res) {
                 $('#imagebase64-avater').val(res);
-                $('#imagename-avater').val(avatername);
+
+                $('#imagename-avater').val(filename[0]);
             })
     })
 
 
-// ------------------------------------------
+    // ------------------------------------------
     let username = $('#newname').val();
     let authname = true;
-    $('#newname').focusout(function(){
-        if($(this).val()==username){
+    $('#newname').focusout(function () {
+        if ($(this).val() == username) {
             return;
         }
-        axios.get('/auth/checkname',{
-            params:{
+        axios.get('/auth/checkname', {
+            params: {
                 name: $('#newname').val()
             }
         })
-        .then(function(res){
-            console.log(res.data.available)
-            if(!res.data.available){
-                $('#namelabel').text("*此用戶名稱已被使用")
-                authname = false;
-            }else{
-                $('#namelabel').text("")
-                authname = true;
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-        })
+            .then(function (res) {
+                console.log(res.data.available)
+                if (!res.data.available) {
+                    $('#namelabel').text("*此用戶名稱已被使用")
+                    authname = false;
+                } else {
+                    $('#namelabel').text("")
+                    authname = true;
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
     })
 
     //---------------textarea-----------------------
-    $('#btn_info').on('click',function(){
-        if(!authname) return;
+    $('#btn_info').on('click', function () {
+        if (!authname) return;
         let info = $('#intro').val()
-        info = info.replace(/\n|\r\n/g,"<br>");
+        info = info.replace(/\n|\r\n/g, "<br>");
         $('#intro').val(info)
         $('#signup-form').submit();
     })
-    let trasintro = function(){
+    let trasintro = function () {
         let info = $('#intro').val();
-        info = info.replace(/<br>/g ,"\n");
+        info = info.replace(/<br>/g, "\n");
         $('#intro').val(info);
         console.log(info)
     }

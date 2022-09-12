@@ -18,7 +18,7 @@ $(function () {
         }
         reader.readAsDataURL(file[0])
         $('.modal-body').show()
-        $('#uploadimage').prop('disabled',false);
+        $('#uploadimage').prop('disabled', false);
         $('.modal-footer').hide()
     })
 
@@ -36,7 +36,8 @@ $(function () {
         })
             .then(function (res) {
                 $('#imagebase64').val(res);
-                $('#imagename').val(upload_image.files[0].name);
+                let filename = upload_image.files[0].name.split('.')
+                $('#imagename').val(filename[0]);
                 console.log(res)
             })
     })
@@ -46,16 +47,16 @@ $(function () {
     $.get(`auth/getpost${n}`, function (data) {
         userid = data.userid;
         const imgpath = data.imagePath;
-        var new_colpost = function() {
+        var new_colpost = function () {
             var colnum = 0;
             var postindex = 0;
             while (postindex < imgpath.length) {
                 $('#postContainer').append('<div class="col-post" id="col-post">');
                 console.log("new col")
-                for (var postnum = 0; postnum < 3 && postindex<imgpath.length; postnum++){
+                for (var postnum = 0; postnum < 3 && postindex < imgpath.length; postnum++) {
                     console.log(colnum)
-                    var path = "img/users/"+userid+"/"+imgpath[postindex].image_name
-                    $(`#col-post:nth-child(${colnum+1})`).append(`<div class="post"><img class="postimage" src="${path}" alt=""></div>`);
+                    var path = imgpath[postindex].image_name
+                    $(`#col-post:nth-child(${colnum + 1})`).append(`<div class="post"><img class="postimage" src="${path}" alt=""></div>`);
                     postindex++;
                 }
                 colnum++;
@@ -64,6 +65,6 @@ $(function () {
         new_colpost()
     })
 
-    
-    
+
+
 });
