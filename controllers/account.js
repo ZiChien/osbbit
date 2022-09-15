@@ -5,7 +5,8 @@ const db = mysql.createPool({
     host: process.env.host,
     user: process.env.user,
     password: process.env.password,
-    database: process.env.database
+    database: process.env.database,
+    charset: 'utf8mb4'
 });
 // 抓取 /home 所需資料
 // exports.home = (req, res)=>{
