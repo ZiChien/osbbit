@@ -25,7 +25,6 @@ exports.uploadpost = (req, res) => {
     }
     // const base64Data = req.body.imagebase64.split('base64,')[1];
     const imagename = Date.now() + '-' + req.body.imagename;
-
     //stored in Cloudinary
     try {
         cloudinary.uploader
@@ -35,7 +34,6 @@ exports.uploadpost = (req, res) => {
                     public_id: imagename
                 })
             .then((result) => {
-                console.log(result)
                 // save image path to database
                 var sql = `INSERT INTO users_image SET ?`;
                 db.query(sql, { user_id: req.session.user, image_name: result.secure_url }, (err, results) => {

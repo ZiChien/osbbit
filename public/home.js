@@ -31,14 +31,19 @@ $(function () {
         console.log('!')
         basic.croppie('result', {
             type: 'canvas',
-            size: 'viewport',
-            quality: 1
+            size: {
+                width: 800,
+                height: 800
+            },
         })
             .then(function (res) {
                 $('#imagebase64').val(res);
                 let filename = upload_image.files[0].name.split('.')
                 $('#imagename').val(filename[0]);
                 console.log(res)
+            })
+            .catch(function(err){
+                console.log(err);
             })
     })
 
