@@ -34,7 +34,8 @@
 				<div class="oslogo"><a href="./"><img src="/img/static/logo.png" alt=""></a></div>
 				<div class="toollist">
 					<div class="tool">
-						<button data-bs-toggle="modal" data-bs-target="#exampleModal"><span><i class="fa-solid fa-plus"></i></span></button>
+						<button data-bs-toggle="modal" data-bs-target="#exampleModal"><span><i
+									class="fa-solid fa-plus"></i></span></button>
 					</div>
 					<div class="tool tool_search">
 						<button onclick="location.href='/explore'"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -43,20 +44,21 @@
 						<button><a href="/account"><img src={{avater}} alt=""></a></button>
 					</div>
 				</div>
-				
 
-				
+
+
 			</nav>
 		</div>
 		{{else}}
-		<div class="back"><button onclick="location.href='../'"></a><i class="fa-solid fa-arrow-left"></i></button></div>
-        <div class="osnav chnav">
-            <nav>
-                
-                <h3>{{username}}</h3>
-            </nav>
-        </div>
-		
+		<div class="back"><button onclick="history.back()"></a><i class="fa-solid fa-arrow-left"></i></button>
+		</div>
+		<div class="osnav chnav">
+			<nav>
+
+				<h3>{{username}}</h3>
+			</nav>
+		</div>
+
 		{{/if}}
 	</header>
 	<main>
@@ -66,12 +68,12 @@
 				<div class="proname">
 					<h3>{{username}}</h3>
 					<h6>{{email}}</h6>
-					
+
 				</div>
 			</div>
 			<div class="Proinfo">
 				<p>{{#if intro}}{{{intro}}}{{/if}}</p>
-				
+
 				{{#if web}}<h6><a href={{web}}>{{web}}</a></h6>{{/if}}
 			</div>
 		</div>
@@ -102,7 +104,8 @@
 					<h5 class="modal-title" id="exampleModalLabel">New Post</h5>
 					<form action="/auth/uploadpost" id="uploadform" method="post">
 
-						<button type="submit" id="uploadimage" class="btn btn-primary" disabled>Next</button>
+						<button type="button" id="uploadimage" class="btn btn-primary" disabled>Next</button>
+						<button type="button" id="uploadpost" class="btn btn-primary" style="display: none;">share</button>
 						<input type="hidden" id="imagebase64" name="imagebase64">
 						<input type="hidden" id="imagename" name="imagename">
 					</form>
@@ -131,6 +134,15 @@
 
 					{{!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
 
+				</div>
+				<div class="postintro" id="postintro" style="display: none;">
+					<div class="postheader">
+						<div class="postavater"><img src="https://res.cloudinary.com/chian/image/upload/v1663897788/32/1663897783838-mybabe_v2.png" alt=""></div>
+						<p>chian_moss</p>
+					</div>
+					<div class="textintro">
+						<textarea name="uploadintro" id="uploadintro" form="uploadform" cols="10" rows="5" placeholder="撰寫說明"></textarea>
+					</div>
 				</div>
 			</div>
 		</div>

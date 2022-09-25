@@ -3,6 +3,30 @@ const path = require('path');
 const mysql = require("mysql");
 const session = require('express-session');
 const cloudinary = require('cloudinary').v2;
+const MongoClient = require('mongodb').MongoClient;
+
+async function addpost(doc){
+    try {
+        const client = new MongoClient(process.env.mongouri);
+        const database = client.db('users');
+        const post = database.collection('post');
+        
+        let postdoc={
+            user_name: doc.user_name,
+            image_path: doc.image_path,
+            public_id: doc.public_id,
+            asset_id: doc.asset_id,
+            postintro: doc.postintro,
+            postdate: doc.postdate,
+        }
+        const result = await post.insertOne(postdoc);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+
 
 const db = mysql.createPool({
     host: process.env.host,
@@ -23,21 +47,23 @@ exports.uploadpost = (req, res) => {
     if (!req.session.user) {
         return res.redirect('../login');
     }
-    // const base64Data = req.body.imagebase64.split('base64,')[1];
-    const imagename = Date.now() + '-' + req.body.imagename;
     //stored in Cloudinary
     try {
         cloudinary.uploader
             .upload(req.body.imagebase64,
                 {
                     folder: req.session.user,
-                    public_id: imagename
                 })
             .then((result) => {
-                // save image path to database
-                var sql = `INSERT INTO users_image SET ?`;
-                db.query(sql, { user_id: req.session.user, image_name: result.secure_url }, (err, results) => {
-                    if (err) throw err;
+                let time = new Date()
+                time = time.toLocaleDateString() 
+                addpost({
+                    user_name: req.session.username,
+                    image_path: result.secure_url,
+                    public_id: result.public_id,
+                    asset_id: result.asset_id,
+                    postintro: req.body.uploadintro,
+                    postdate: time,
                 })
                 return res.redirect('../');
             })
@@ -92,9 +118,9 @@ exports.uploadavater = (req, res) => {
                     }
                     //delete old avater
                     try {
-                        
+
                         let file = oldavaterPath.split('/')
-                        file = file[file.length-1].split('.')
+                        file = file[file.length - 1].split('.')
                         let publicid = `${req.session.user}/${file[0]}`
                         cloudinary.uploader.destroy(publicid)
                             .then((result) => {

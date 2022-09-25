@@ -40,28 +40,33 @@ $(function () {
                 $('#imagebase64').val(res);
                 let filename = upload_image.files[0].name.split('.')
                 $('#imagename').val(filename[0]);
-                console.log(res)
+                $('#postintro').show();
+                $('#uploadpost').show();
+                $('.modal-body').hide();
+                $('#uploadimage').hide();
             })
             .catch(function(err){
                 console.log(err);
             })
     })
+    $('#uploadpost').on('click',function(e){
+        $('#uploadform').submit()
+    })
 
     //addpost
     let n = location.pathname
     $.get(`auth/getpost${n}`, function (data) {
-        userid = data.userid;
-        const imgpath = data.imagePath;
+        const result = data.result;
         var new_colpost = function () {
             var colnum = 0;
             var postindex = 0;
-            while (postindex < imgpath.length) {
+            while (postindex < result.length) {
                 $('#postContainer').append('<div class="col-post" id="col-post">');
                 console.log("new col")
-                for (var postnum = 0; postnum < 3 && postindex < imgpath.length; postnum++) {
-                    console.log(colnum)
-                    var path = imgpath[postindex].image_name
-                    $(`#col-post:nth-child(${colnum + 1})`).append(`<div class="post"><img class="postimage" src="${path}" alt=""></div>`);
+                for (var postnum = 0; postnum < 3 && postindex < result.length; postnum++) {
+                    let path = result[postindex].image_path;
+                    let asset_id = result[postindex].asset_id;
+                    $(`#col-post:nth-child(${colnum + 1})`).append(`<div class="post"><a href="../p/${asset_id}"><img class="postimage" src="${path}" data-asset_id="${asset_id}" alt=""></a></div>`);
                     postindex++;
                 }
                 colnum++;

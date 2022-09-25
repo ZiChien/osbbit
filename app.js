@@ -57,9 +57,11 @@ app.use(session({
 
 const router = require('./routes/pages');
 const auth = require('./routes/auth');
+const post = require('./routes/post');
 
 app.use('/',router);
 app.use('/auth',auth);
+app.use('/p',post);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT,()=>{

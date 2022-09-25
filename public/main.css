@@ -91,10 +91,7 @@ main {
 	width: 90%;
 	margin: auto;
 }
-@media (min-width: 800px) {
-	
-	
-}
+
 @media (min-width: 512px) {
 	main, .osnav{
 		max-width: 500px;
@@ -147,7 +144,7 @@ main {
 
 /* modal */
 .modal-body {
-	padding: 0 0 55px 0 !important;
+	padding: 0 0 10px 0 !important;
 }
 
 .modal-body-avater {
@@ -664,4 +661,92 @@ h6 {
 }
 .osrow{
 	justify-content: center;
+}
+
+.os-postcontainer{
+	width: 100%;
+	min-width: 200px;
+	margin: auto;
+	padding-top: 51px;
+}
+@media (min-width: 480px) {
+	.os-postcontainer{
+		max-width: 480px;
+	}
+}
+.postheader{
+	display: flex;
+	align-items: baseline;
+	margin: 5px 0;
+}
+.postavater{
+	width: 36px;
+	margin: 0px 15px;
+}
+.postavater img{
+	width: 100%;
+	border-radius: 50%;
+}
+.postheader p{
+	font-weight: 600;
+	font-size: 15px;
+}
+.postimg{
+	height: 0px;
+	padding-bottom: 100%;
+}
+.postimg img{
+	width: 100%;
+}
+.postbody{
+	width: 90%;
+	margin: 12px auto;
+}
+.postbody p{
+	font-size: 14px;
+}
+.os-postcontainer a{
+
+	margin-right: 8px;
+	font-size: 16px;
+	text-decoration: none;
+	color: black;
+	font-weight: 900;
+}
+.postbody h6{
+	color: rgb(146, 146, 146);
+} 
+.postheader button{
+	background-color: transparent;
+	width: 27px;
+	margin: 0px 10px 0px auto;
+	font-size: 20px;
+	border: none;
+}
+.deletebqqdf button{
+	display: block;
+	height: 38px;
+	width: 100%;
+	margin: 12px auto;
+	border: none;
+	background-color: transparent;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.deltemodal{
+	margin: 200px 40px;
+	border: none;
+	border-radius: 20px;
+}
+.textintro{
+	width: 90%;
+	margin: auto;
+}
+.textintro textarea {
+ 	border: none;
+	
+}
+.textintro textarea:focus {
+	outline: none;
 }

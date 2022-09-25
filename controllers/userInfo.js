@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const bcrypt = require("bcryptjs");
+const MongoClient = require("mongodb").MongoClient
 
 const db = mysql.createPool({
     host: process.env.host,
@@ -9,25 +10,22 @@ const db = mysql.createPool({
     charset: 'utf8mb4'
 });
 
-exports.getuserpost = (req ,res)=>{
-    console.log(req.params.username);
-    db.query(`SELECT * FROM users WHERE name = ?`,[req.params.username],(err, results)=>{
-        if(err) throw err
-        if(results.length==0){
-            console.log('user not found')
-            return res.status(404).send('user not found')
-        }
-        console.log(req.params.username);
-        let id = results[0].id;
-        db.query(`SELECT image_name FROM users_image WHERE user_id = ?`,[id],(err, results)=>{
-            if(err) throw err;
-            
-            res.json({
-                userid : id,
-                imagePath : results
-            })
-        })
-    })
+exports.getuserpost = async (req ,res)=>{
+    const username = req.params.username;
+    try{
+        const client = new MongoClient(process.env.mongouri);
+        const database = client.db('users');
+        const post = database.collection('post');
+
+        const query = {user_name: username}
+        const result = await post.find(query).toArray();
+        res.json({
+            result: result
+        });
+    }catch(err){
+        console.log(err)
+    }
+    
 }
 exports.authpassword = (req, res)=>{
     if(!req.session.user){

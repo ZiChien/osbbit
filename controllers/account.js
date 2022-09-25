@@ -196,7 +196,7 @@ exports.showchangpassword = (req, res)=>{
             const email = results[0].email;
             const intro = results[0].intro;
             const web = results[0].web;
-            const avaterPath = '../'+results[0].avater;
+            const avaterPath = results[0].avater;
 
             return res.render('account_changpassword', {
                 username: username,
