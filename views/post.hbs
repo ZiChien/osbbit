@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    {{!-- ------------------------------------------------ --}}
+
+    <script src="https://kit.fontawesome.com/358b6c58bb.js" crossorigin="anonymous"></script>
+
+    {{!-- Jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    {{!-- Vue --}}
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <title>Osbbit(@{{username}})</title>
+</head>
+
+<body>
+    <header>
+        <div class="back"><button onclick="history.back()"></a><i
+                    class="fa-solid fa-arrow-left"></i></button></div>
+        <div class="osnav chnav">
+            <nav>
+
+                <h3>貼文</h3>
+            </nav>
+        </div>
+    </header>
+    <div id="os">
+        <div class="os-postcontainer" id="os-postcontainer">
+            <div class="postheader">
+                <div class="postavater"><img :src="data.postavater" alt=""></div>
+                <a :href="userpage_url">\{{data.username}}</a>
+                {{#if permission}}<button data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                        class="fa-solid fa-ellipsis"></i></button>{{/if}}
+            </div>
+            <div class="postimg">
+                <img :src="data.imagepath" alt="">
+            </div>
+            <div class="postbody">
+
+                <p><a :href="userpage_url">\{{data.username}}</a>\{{data.postintro}}</p>
+                <h6>\{{data.postdate}}</h6>
+            </div>
+        </div>
+        {{#if permission}}
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered os-modal">
+                <div class="modal-content deltemodal">
+                    <div class="deletebqqdf">
+                        <button @click="deletepost" style="color: rgb(187, 21, 21);">刪除</button>
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+
+    <script src="../postpage.js"></script>
+</body>
+
+</html>
