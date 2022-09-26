@@ -718,6 +718,7 @@ h6 {
 } 
 .postheader button{
 	background-color: transparent;
+	color: black;
 	width: 27px;
 	margin: 0px 10px 0px auto;
 	font-size: 20px;

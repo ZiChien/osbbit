@@ -23,7 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{!-- axios --}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
+
     <script src="home.js"></script>
     <script src="account-avater.js"></script>
     <title>Osbbit(@{{username}})</title>
@@ -40,8 +40,8 @@
                                     class="fa-solid fa-plus"></i></span></button>
                     </div>
                     <div class="tool tool_search">
-						<button onclick="location.href='/explore'"><i class="fa-solid fa-magnifying-glass"></i></button>
-					</div>
+                        <button onclick="location.href='/explore'"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
                     <div class="tool avater">
                         <button><a href="/account"><img src={{avater}} alt=""></a></button>
                     </div>
@@ -64,46 +64,51 @@
                                         <h2>{{username}}</h2>
                                         <div class="upload-labal-avater">
                                             <label class="btn-file">
-                                                <input type="file" id="upload_image-avater"
-                                                    name="upload_image-avater" style="display:none ;">
+                                                <input type="file" id="upload_image-avater" name="upload_image-avater"
+                                                    style="display:none ;">
                                                 <p>變更大頭貼照</p>
                                             </label>
                                         </div>
-                                        <button data-bs-toggle="modal" style="display: none;" data-bs-target="#exampleModal2"
-                                            id="avaterChange-btn">變更大頭貼照</button>
+                                        <button data-bs-toggle="modal" style="display: none;"
+                                            data-bs-target="#exampleModal2" id="avaterChange-btn">變更大頭貼照</button>
                                     </div>
                                 </div>
                                 <form action="/auth/rename" method="post" name="login" id="signup-form">
                                     <div class="form-group account-label">
                                         <label for="email" id="email-label">電子郵件</label>
-                                        <label class="changedpw-btn" for=""><a href="/account/changpassword">變更密碼</a></label>
-                                        <input type="email" name="email" {{#if email}} value={{email}} {{/if}}class="form-control"
-                                            id="email" aria-describedby="emailHelp" placeholder="email" readonly>
+                                        <label class="changedpw-btn" for=""><a
+                                                href="/account/changpassword">變更密碼</a></label>
+                                        <input type="email" name="email" {{#if email}} value={{email}}
+                                            {{/if}}class="form-control" id="email" aria-describedby="emailHelp"
+                                            placeholder="email" readonly>
                                     </div>
                                     <div class="form-group account-label">
                                         <label for="newname">姓名</label>
                                         <label for="newname" id="namelabel"></label>
                                         <input type="text" name="newname" value={{username}} id="newname"
-                                            class="form-control" aria-describedby="emailHelp"
-                                            placeholder="Username">
+                                            class="form-control" aria-describedby="emailHelp" placeholder="Username">
                                     </div>
                                     <div class="form-group account-label">
                                         <label for="intro">個人簡介</label>
-                                        <textarea class="form-control" name="intro" id="intro" cols="30" rows="3" placeholder="個人簡介" >{{#if intro}}{{{intro}}}{{/if}}</textarea>
-                                        {{!-- <input type="text" name="intro" {{#if intro}} value={{intro}} {{/if}} id="intro" class="form-control"
-                                            aria-describedby="emailHelp" placeholder="個人簡介"> --}}
+                                        <textarea class="form-control" name="intro" id="intro" cols="30" rows="3"
+                                            placeholder="個人簡介">{{#if intro}}{{{intro}}}{{/if}}</textarea>
+                                        {{!-- <input type="text" name="intro" {{#if intro}} value={{intro}} {{/if}}
+                                            id="intro" class="form-control" aria-describedby="emailHelp"
+                                            placeholder="個人簡介"> --}}
                                     </div>
-                                    
+
                                     <div class="form-group account-label">
                                         <label for="web">網址</label>
-                                        <input type="text" name="web" {{#if web}} value={{web}} {{/if}} id="web" class="form-control"
-                                            aria-describedby="emailHelp" placeholder="網址">
+                                        <input type="text" name="web" {{#if web}} value={{web}} {{/if}} id="web"
+                                            class="form-control" aria-describedby="emailHelp" placeholder="網址">
                                     </div>
 
 
                                     <div class="col-md-12 text-center ">
-                                        <button type="button" id="btn_info" class=" btn btn-block btn-primary tx-tfm btn-252f">提交</button>
-                                        <button onclick="location.href='/auth/logout'" type="button" class=" btn btn-block btn-primary tx-tfm btn-252f btn-logout">登出</button>
+                                        <button type="button" id="btn_info"
+                                            class=" btn btn-block btn-primary tx-tfm btn-252f">提交</button>
+                                        <button onclick="location.href='/auth/logout'" type="button"
+                                            class=" btn btn-block btn-primary tx-tfm btn-252f btn-logout">登出</button>
                                     </div>
                                     <div class="col-md-12 ">
                                         <div class="login-or">
@@ -127,12 +132,12 @@
 
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </main>
 
 
@@ -151,7 +156,8 @@
                     <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
                     <form action="/auth/uploadpost" id="uploadform" method="post">
 
-                        <button type="submit" id="uploadimage" class="btn btn-primary" disabled>Next</button>
+                        <button type="button" id="uploadimage" class="btn btn-primary" disabled>Next</button>
+                        <button type="button" id="uploadpost" class="btn btn-primary" style="display: none;">share</button>
                         <input type="hidden" id="imagebase64" name="imagebase64">
                         <input type="hidden" id="imagename" name="imagename">
                     </form>
@@ -176,23 +182,30 @@
                             <p>upload</p>
                         </label>
                     </div>
-
-
                     {{!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-
                 </div>
+                <div class="postintro" id="postintro" style="display: none;">
+                        <div class="postheader">
+                            <div class="postavater"><img src={{avater}} alt=""></div>
+                            <p>{{username}}</p>
+                        </div>
+                        <div class="textintro">
+                            <textarea name="uploadintro" id="uploadintro" form="uploadform" cols="10" rows="5"
+                                placeholder="撰寫說明"></textarea>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered os-modal" id="modal-avater">
             <div class="os-close-btn">
-                <button type="button" class="btn-close" id="avater-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                
+                <button type="button" class="btn-close" id="avater-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
 
             <div class="modal-content">
-                
+
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel">avater</h5>
@@ -205,20 +218,16 @@
                 </div>
                 <div class="modal-body-avater">
                     <div class="inputfile">
-
                     </div>
                     <div id="page">
                         <div id="demo-basic-avater">
                         </div>
                     </div>
-
                 </div>
-                
-
             </div>
         </div>
     </div>
-    
+
     <script src="\croppie.min.js"></script>
 </body>
 
