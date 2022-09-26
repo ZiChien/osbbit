@@ -22,6 +22,11 @@
 
 	{{!-- Jquery --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	{{!-- NProgress --}}
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+
 	<script src="home.js"></script>
 	<title>Osbbit(@{{username}})</title>
 </head>
@@ -82,11 +87,26 @@
 				<h1>Post</h1>
 			</div>
 			<div class="postContainer" id="postContainer">
-				{{!-- <div class="col-post" id="col-post">
-					<div class="post"><img class="postimage" src="img/users/8/1660724799107-mybabe_v2.png" alt=""></div>
-					<div class="post"><img class="postimage" src="img/users/8/1660724896587-festival_rabbit.jpg" alt="">
+				{{!-- <div id="loading">
+					<div class="col-post" id="col-post">
+						<div class="post"></div>
+						<div class="post"></div>
 					</div>
 				</div> --}}
+			</div>
+			<div class="loading_postContainer" id="loading_postContainer">
+				<div id="loading">
+					<div class="col-post" id="col-post">
+						<div class="post"></div>
+						<div class="post"></div>
+						<div class="post"></div>
+					</div>
+					<div class="col-post" id="col-post">
+						<div class="post"></div>
+						<div class="post"></div>
+						<div class="post"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -98,7 +118,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 
-			<div class="modal-content">
+			<div class="modal-content" id="modal-content">
 				<div class="modal-header">
 
 					<h5 class="modal-title" id="exampleModalLabel">New Post</h5>

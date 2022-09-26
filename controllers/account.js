@@ -33,7 +33,7 @@ const db = mysql.createPool({
 
 
 //抓取 /account 所需資料
-exports.account = (req,res)=>{
+exports.account = (req, res) => {
     if (req.session.user) {
         var sql = `SELECT * FROM users WHERE id = ?`;
         db.query(sql, [req.session.user], (error, results) => {
@@ -56,9 +56,9 @@ exports.account = (req,res)=>{
         return res.redirect('./login')
     }
 }
-exports.homepage = (req,res)=>{
+exports.homepage = (req, res) => {
     if (req.session.user) {
-        if(req.session.username==req.params.username){
+        if (req.session.username == req.params.username) {
             var sql = `SELECT * FROM users WHERE id = ?`;
             db.query(sql, [req.session.user], (error, results) => {
                 if (error) throw error;
@@ -75,18 +75,18 @@ exports.homepage = (req,res)=>{
                     intro: intro,
                     web: web,
                     own: true,
-                    
+
                 });
             })
-        }else{
-            if(!req.params.username){
+        } else {
+            if (!req.params.username) {
                 return res.redirect(`../${req.session.username}`)
             }
             userName = req.params.username;
             var sql = `SELECT * FROM users WHERE name = ?`;
             db.query(sql, [userName], (error, results) => {
                 if (error) throw error;
-                if(results.length<1){
+                if (results.length < 1) {
                     return res.send("notfound")
                 }
                 const username = results[0].name;
@@ -107,60 +107,63 @@ exports.homepage = (req,res)=>{
         }
     }
     else {
-        if(!req.params.username){
+        if (!req.params.username) {
             return res.render('login')
         }
-            userName = req.params.username;
-            var sql = `SELECT * FROM users WHERE name = ?`;
-            db.query(sql, [userName], (error, results) => {
-                if (error) throw error;
-                if(results.length==0){
-                    return res.send("notfound")
-                }
-                const username = results[0].name;
-                const email = results[0].email;
-                const avaterPath = results[0].avater;
-                const intro = results[0].intro;
-                const web = results[0].web;
+        userName = req.params.username;
+        var sql = `SELECT * FROM users WHERE name = ?`;
+        db.query(sql, [userName], (error, results) => {
+            if (error) throw error;
+            if (results.length == 0) {
+                return res.send("notfound")
+            }
+            const username = results[0].name;
+            const email = results[0].email;
+            const avaterPath = results[0].avater;
+            const intro = results[0].intro;
+            const web = results[0].web;
 
-                return res.render('homepage', {
-                    username: username,
-                    email: email,
-                    avater: avaterPath,
-                    intro: intro,
-                    web: web,
-                    own: false,
-                });
-            })
+            return res.render('homepage', {
+                username: username,
+                email: email,
+                avater: avaterPath,
+                intro: intro,
+                web: web,
+                own: false,
+            });
+        })
     }
 }
 //個資更新
-exports.rename = (req, res)=>{
+exports.rename = (req, res) => {
     // const {newname, password,newpassword,newConfirmpassword} = req.body;
     // if(newpassword !== newConfirmpassword){
     //     return res.redirect('./account');
     // }
-    const {newname, intro, web} = req.body;
-    if(newname!=''){
+    const { newname, intro, web } = req.body;
+    if (newname != '') {
         const setName = `UPDATE users SET name = ? WHERE id = ?`;
-        db.query(setName,[newname,req.session.user],(error, results)=>{
-            if(error) throw error;
+        db.query(setName, [newname, req.session.user], (error, results) => {
+            const setintro = `UPDATE users SET intro = ? WHERE id = ?`;
+            db.query(setintro, [intro, req.session.user], (error, results) => {
+                const setweb = `UPDATE users SET web = ? WHERE id = ?`;
+                db.query(setweb, [web, req.session.user], (error, results) => {
+                    if (error) throw error;
+                })
+                return res.redirect('../account')
+                if (error) throw error;
+            })
+            if (error) throw error;
         })
-        
+
         req.session.username = newname;
         req.session.save();
     }
-    const setintro = `UPDATE users SET intro = ? WHERE id = ?`;
-    db.query(setintro,[intro,req.session.user],(error, results)=>{
-        if(error) throw error;
-    })
-    const setweb = `UPDATE users SET web = ? WHERE id = ?`;
-    db.query(setweb,[web,req.session.user],(error, results)=>{
-        if(error) throw error;
-    })
-    return res.redirect('../account')
-    
-    
+
+
+
+
+
     // changed password
     // db.query(`SELECT * FROM users WHERE id = ?`, [req.session.user],async (error, results) => {
     //     if (error) throw error;
@@ -179,15 +182,15 @@ exports.rename = (req, res)=>{
     //     console.log(originalPassword);
     // })
 }
-exports.saveImg = (req ,res)=>{
+exports.saveImg = (req, res) => {
     const sql = `UPDATE users SET avater = ? WHERE id = ?`;
-    db.query(sql,[req.file.filename,req.session.user],(error, results)=>{
-        if(error) throw error;
+    db.query(sql, [req.file.filename, req.session.user], (error, results) => {
+        if (error) throw error;
 
         return res.redirect('../account')
     })
 }
-exports.showchangpassword = (req, res)=>{
+exports.showchangpassword = (req, res) => {
     if (req.session.user) {
         var sql = `SELECT * FROM users WHERE id = ?`;
         db.query(sql, [req.session.user], (error, results) => {

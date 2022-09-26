@@ -30,7 +30,6 @@ exports.post = async (req, res) => {
 
 }
 exports.getpostdoc = async (req, res) => {
-
     const asset_id = req.params.asset_id;
     try {
         const client = new MongoClient(process.env.mongouri);

@@ -93,12 +93,16 @@ main {
 }
 
 @media (min-width: 512px) {
-	main, .osnav{
+
+	main,
+	.osnav {
 		max-width: 500px;
 	}
-	.Proheader{
+
+	.Proheader {
 		width: 50% !important;
 	}
+
 	.Proinfo {
 		width: 50% !important;
 	}
@@ -171,6 +175,7 @@ main {
 	width: 100%;
 	border-radius: 10px;
 }
+
 .postimage:hover {
 	transition: 0.4s;
 	opacity: 0.6;
@@ -627,85 +632,103 @@ h6 {
 	position: relative;
 	color: #aaa;
 }
-.recon{
+
+.recon {
 	display: flex;
 	flex-wrap: wrap;
 }
-.earec{
+
+.earec {
 	width: 100%;
 }
-.earec button{
+
+.earec button {
 	width: 100%;
 	height: 55px;
 	border: none;
-	border-top: 1px solid rgb(189, 189, 189,0.6);
+	border-top: 1px solid rgb(189, 189, 189, 0.6);
 	background-color: transparent;
 }
-.btnfqewf554{
+
+.btnfqewf554 {
 	display: flex;
 	align-items: center;
 }
-.btnfqewf554 h4{
+
+.btnfqewf554 h4 {
 	color: rgb(102, 102, 102);
 	font-weight: 400;
-	margin: 0 ;
+	margin: 0;
 	font-size: 16px;
 }
-.btnfqewf554img{
+
+.btnfqewf554img {
 	width: 38px;
 	margin: 0 8px;
 }
-.btnfqewf554img img{
+
+.btnfqewf554img img {
 	width: 100%;
 	border-radius: 50%;
 }
-.osrow{
+
+.osrow {
 	justify-content: center;
 }
 
-.os-postcontainer{
+.os-postcontainer {
 	width: 100%;
 	min-width: 200px;
 	margin: auto;
 	padding-top: 51px;
 }
+
 @media (min-width: 480px) {
-	.os-postcontainer{
+	.os-postcontainer {
 		max-width: 480px;
 	}
 }
-.postheader{
+
+.postheader {
 	display: flex;
 	align-items: baseline;
 	margin: 5px 0;
 }
-.postavater{
+
+.postavater {
 	width: 36px;
 	margin: 0px 15px;
 }
-.postavater img{
+
+.postavater img {
 	width: 100%;
 	border-radius: 50%;
 }
-.postheader p{
+
+.postheader p {
 	font-weight: 600;
 	font-size: 15px;
 }
-.postimg{
+
+.postimg {
 	height: 0px;
 	padding-bottom: 100%;
 }
-.postimg img{
+
+.postimg img {
 	width: 100%;
 }
-.postbody{
+
+.postbody {
 	width: 90%;
 	margin: 12px auto;
 }
-.postbody p{
+
+.postbody p {
 	font-size: 14px;
 }
-.os-postcontainer a{
+
+.os-postcontainer a {
 
 	margin-right: 8px;
 	font-size: 16px;
@@ -713,10 +736,12 @@ h6 {
 	color: black;
 	font-weight: 900;
 }
-.postbody h6{
+
+.postbody h6 {
 	color: rgb(146, 146, 146);
-} 
-.postheader button{
+}
+
+.postheader button {
 	background-color: transparent;
 	color: black;
 	width: 27px;
@@ -724,7 +749,8 @@ h6 {
 	font-size: 20px;
 	border: none;
 }
-.deletebqqdf button{
+
+.deletebqqdf button {
 	display: block;
 	height: 38px;
 	width: 100%;
@@ -735,19 +761,86 @@ h6 {
 	font-weight: 700;
 }
 
-.deltemodal{
+.deletebqqdf {
+	border-radius: 14px;
+}
+
+.deltemodal {
 	margin: 200px 40px;
 	border: none;
-	border-radius: 20px;
+	border-radius: 15px;
 }
-.textintro{
+
+.textintro {
 	width: 90%;
 	margin: auto;
 }
+
 .textintro textarea {
- 	border: none;
-	
+	border: none;
+
 }
+
 .textintro textarea:focus {
 	outline: none;
+}
+
+#loading_postContainer .post {
+	background-color: rgb(235, 235, 235);
+}
+
+#loading_postContainer .post::before {
+	width: 100%;
+	height: 170px;
+	content: "";
+	position: absolute;
+	background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+	background-position: -400px 0;
+	background-repeat: no-repeat;
+	animation: loading2 1.5s infinite;
+}
+
+@keyframes loading2 {
+	to {
+		background-position: 400px 0;
+	}
+}
+
+#nprogress .bar {
+	background: rgb(125, 124, 219) !important;
+
+	top: 0;
+	left: 0;
+
+	width: 100% !important;
+	height: 3px !important;
+
+}
+#loading-os .postavater{
+	width: 36px;
+	height: 36px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 50px;
+}
+#loading-os .postheader{
+	align-items: center;
+}
+#loading-os a{
+	width: 105px;
+	height: 17px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 50px;
+}
+#loading-os .postimg{
+	background-color: rgb(235, 235, 235);
+}
+#loading-os p{
+	background-color: rgb(235, 235, 235);
+	border-radius: 50px;
+}
+#loading-os h6{
+	height: 15px;
+	width: 93px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 50px;
 }

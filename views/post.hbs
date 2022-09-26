@@ -25,49 +25,74 @@
     {{!-- Vue --}}
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+    {{!-- NProgress --}}
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+
     <title>Osbbit(@{{username}})</title>
 </head>
 
 <body>
-    <header>
-        <div class="back"><button onclick="history.back()"></a><i
-                    class="fa-solid fa-arrow-left"></i></button></div>
-        <div class="osnav chnav">
-            <nav>
+    <div id="v_os">
+        <header>
+            <div class="back"><button onclick="history.back()"></a><i class="fa-solid fa-arrow-left"></i></button></div>
+            <div class="osnav chnav">
+                <nav>
 
-                <h3>貼文</h3>
-            </nav>
-        </div>
-    </header>
-    <div id="os">
-        <div class="os-postcontainer" id="os-postcontainer">
-            <div class="postheader">
-                <div class="postavater"><img :src="data.postavater" alt=""></div>
-                <a :href="userpage_url">\{{data.username}}</a>
-                {{#if permission}}<button data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                        class="fa-solid fa-ellipsis"></i></button>{{/if}}
+                    <h3>貼文</h3>
+                </nav>
             </div>
-            <div class="postimg">
-                <img :src="data.imagepath" alt="">
-            </div>
-            <div class="postbody">
+        </header>
+        <div id="os" v-show="hasloaded">
+            <div class="os-postcontainer" id="os-postcontainer">
+                <div class="postheader">
+                    <div class="postavater"><img :src="data.postavater" alt=""></div>
+                    <a :href="userpage_url">\{{data.username}}</a>
+                    {{#if permission}}<button data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                            class="fa-solid fa-ellipsis"></i></button>{{/if}}
+                </div>
+                <div class="postimg">
+                    <img :src="data.imagepath" alt="">
+                </div>
+                <div class="postbody">
 
-                <p><a :href="userpage_url">\{{data.username}}</a>\{{data.postintro}}</p>
-                <h6>\{{data.postdate}}</h6>
+                    <p><a :href="userpage_url">\{{data.username}}</a>\{{data.postintro}}</p>
+                    <h6>\{{data.postdate}}</h6>
+                </div>
             </div>
-        </div>
-        {{#if permission}}
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered os-modal">
-                <div class="modal-content deltemodal">
-                    <div class="deletebqqdf">
-                        <button @click="deletepost" style="color: rgb(187, 21, 21);">刪除</button>
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close">取消</button>
+            {{#if permission}}
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered os-modal">
+                    <div class="modal-content deltemodal">
+                        <div class="deletebqqdf" id="deletebqqdf">
+                            <button @click="deletepost" style="color: rgb(187, 21, 21);"
+                                :disabled="delete_able">刪除</button>
+                            <button type="button" data-bs-dismiss="modal" aria-label="Close">取消</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            {{/if}}
         </div>
-        {{/if}}
+        <div id="loading-os" v-show="!hasloaded">
+            <div class="os-postcontainer" id="os-postcontainer">
+                <div class="postheader">
+                    <div class="postavater"><img src="" alt=""></div>
+                    <a href=""></a>
+                </div>
+                <div class="postimg">
+                    <img src="" alt="">
+                </div>
+                <div class="postbody">
+
+                    <p><a href=""></a></p>
+                    <p><a href=""></a></p>
+                    <h6></h6>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script src="../postpage.js"></script>

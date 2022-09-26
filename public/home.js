@@ -50,12 +50,17 @@ $(function () {
             })
     })
     $('#uploadpost').on('click',function(e){
+        NProgress.configure({parent:'#modal-content'})
+        NProgress.start();
+        NProgress.set(0.7);
         $('#uploadform').submit()
     })
 
     //addpost
     let n = location.pathname
     $.get(`auth/getpost${n}`, function (data) {
+        
+        $('#loading_postContainer').remove()
         const result = data.result;
         var new_colpost = function () {
             var colnum = 0;
@@ -66,6 +71,7 @@ $(function () {
                 for (var postnum = 0; postnum < 3 && postindex < result.length; postnum++) {
                     let path = result[postindex].image_path;
                     let asset_id = result[postindex].asset_id;
+                    console.log("new")
                     $(`#col-post:nth-child(${colnum + 1})`).append(`<div class="post"><a href="../p/${asset_id}"><img class="postimage" src="${path}" data-asset_id="${asset_id}" alt=""></a></div>`);
                     postindex++;
                 }
