@@ -8,28 +8,6 @@ const db = mysql.createPool({
     database: process.env.database,
     charset: 'utf8mb4'
 });
-// 抓取 /home 所需資料
-// exports.home = (req, res)=>{
-//     var username;
-//     if (req.session.user) {
-//         userID = req.session.user;
-//         var sql = `SELECT * FROM users WHERE id = ?`;
-//         db.query(sql, [userID], (error, results) => {
-//             if (error) throw error;
-//             username = results[0].name;
-//             email = results[0].email;
-//             console.log(email);
-//             res.render('index', {
-//                 username: username,
-//                 email: email
-//             });
-//         })
-//     } else {
-//         res.render('index', {
-//             username: username
-//         });
-//     }
-// }
 
 
 //抓取 /account 所需資料

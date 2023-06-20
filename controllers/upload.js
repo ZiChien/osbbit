@@ -70,25 +70,6 @@ exports.uploadpost = (req, res) => {
     } catch (error) {
         console.error(error);
     }
-
-
-    // stored in local disk
-    //const dir = path.join(__dirname, `../public/img/users/${req.session.user}/`);
-    // fs.writeFile(dir + imagename, base64Data, 'base64', (err) => {
-    //     if (err) {
-    //         if (err.code === "ENOENT") {
-    //             fs.mkdir(dir, { recursive: true }, function (err) { })
-    //             fs.writeFile(dir + imagename, base64Data, 'base64', (err) => {
-    //                 if (err) console.log(err);
-    //                 return res.redirect('../');
-    //             })
-    //         }
-    //     }else
-    //         return res.redirect('../');
-    // })
-
-
-
 }
 exports.uploadavater = (req, res) => {
     // const base64Data = req.body.imagebase64_avater.split('base64,')[1];
